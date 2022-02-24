@@ -29,6 +29,18 @@ const resolvers = {
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
+        },
+        saveBook: async (parent, args, context) => {
+            console.log("HERE")
+            console.log(context)
+            console.log(context.user)
+            console.log(context.user._id)
+            const user = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $push: {savedBooks: args} },
+                { new: true }
+            );
+            return user;
         }
     }
 };
