@@ -16,13 +16,13 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
-                throw new AuthenticationError('No profile with this email found!');
+                throw new AuthenticationError('No user with this email found!');
             }
-            const correctPw = await profile.isCorrectPassword(password);
+            const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
                 throw new AuthenticationError('Incorrect password!');
             }
-            const token = signToken(profile);
+            const token = signToken(user);
             return { token, user };
         },
         addUser: async (parent, { username, email, password }) => {
