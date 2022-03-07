@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: process.env.API_URI || "http://localhost:3001/graphql",
+  uri: process.env.API_URI || "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
